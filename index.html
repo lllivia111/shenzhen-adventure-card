@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="选一条深圳路线，抽三个隐藏任务，送出一张朋友间的一日冒险卡。">
+<meta name="robots" content="noindex,nofollow">
+<title>深圳一日冒险卡</title>
+<style>
+:root{font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:#1c3434;background:#f3f5f1}*{box-sizing:border-box}body{margin:0}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #eeae43;outline-offset:2px}
+.shell{max-width:1120px;margin:auto;padding:24px 22px 42px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d5dfd8;padding-bottom:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:900}.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:7px;background:#125054;color:#fff;font-size:22px}.top small{color:#718780;letter-spacing:1px;font-weight:800}
+main{display:grid;grid-template-columns:minmax(330px,470px) minmax(320px,1fr);gap:clamp(30px,7vw,90px);padding-top:38px}.eyebrow{margin:0 0 6px;color:#c96246;font-size:11px;font-weight:900;letter-spacing:2px}h1{font-size:clamp(28px,3.2vw,40px);line-height:1.22;margin:0 0 10px}.intro{margin:0 0 22px;color:#657b73;font-size:14px;line-height:1.65}.card{position:relative;overflow:hidden;width:100%;aspect-ratio:440/630;border-radius:8px;background:#114348;box-shadow:0 20px 40px #173b3829}.front,.back{position:absolute;inset:0;display:flex;flex-direction:column}.back{display:none;padding:30px;background:#114348;color:#fff}.card.flipped .front{display:none}.card.flipped .back{display:flex}
+.cover{position:relative;flex:0 0 50%;overflow:hidden;padding:25px 26px;background:#114348;color:#fff}.cover:after{content:"";position:absolute;inset:0;opacity:.25;background-image:radial-gradient(#fff 0.7px,transparent 0.7px);background-size:13px 13px;pointer-events:none}.cover-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:10px;font-weight:900;letter-spacing:1px}.date-tag{padding:7px 10px;border:1px solid #ffffff9e;border-radius:50px;white-space:nowrap}.cover-title{position:relative;z-index:2;margin:28px 0 0;font-size:clamp(36px,6vw,52px);line-height:1.12;font-weight:900}.cover-title span{display:block;color:#ffca66}.scene{position:absolute;left:0;bottom:0;width:100%;height:55%}
+.ticket{flex:1;display:flex;flex-direction:column;background:#fffef9;padding:20px 26px 19px}.ticket-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:13px}.route-name{font-size:18px;font-weight:900}.serial{font-size:10px;color:#83958d;font-weight:800;white-space:nowrap}.stops{display:grid;gap:8px;margin:0;padding:0;list-style:none}.stop{display:grid;grid-template-columns:47px minmax(0,1fr);gap:8px;align-items:baseline}.stop time{color:#d16649;font-size:12px;font-weight:900}.stop span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:800}.ticket-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 8px;margin-top:auto;padding-top:10px;border-top:1px dashed #b8cbc2;color:#5a736a;font-size:11px;font-weight:800}.ticket-foot span:first-child,.meet-location{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.meet-location{grid-column:1/-1;font-size:10px}
+.flip-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;color:#71847c;font-size:12px}.text-button{border:0;background:none;color:#0b7573;font-size:12px;font-weight:900;padding:8px 0}.back .kicker{color:#ffca66;font-size:11px;font-weight:900;letter-spacing:2px}.back h2{font-size:34px;margin:20px 0 8px}.back .sub{color:#bdd9cf;font-size:13px;line-height:1.6}.mission-box{margin-top:28px;border:1px solid #7cac9e;border-radius:5px;padding:20px;background:#ffffff0d}.mission-box small{color:#ffca66;font-weight:900}.mission-box p{font-size:21px;font-weight:800;line-height:1.5}.back-foot{margin-top:auto;padding-top:18px;border-top:1px dashed #7cac9e;white-space:pre-line;overflow-wrap:anywhere;font-size:12px;line-height:1.8}
+.editor h2{font-size:14px;margin:3px 0 13px}.routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.route-button{min-width:0;min-height:76px;text-align:left;padding:10px;border:1px solid #cbd9d1;border-radius:5px;background:#fff;color:#24443f}.route-button[aria-pressed=true]{border:2px solid #0b7573;background:#e7f4ef;padding:9px}.route-button strong,.route-button small{display:block}.route-button strong{font-size:13px;line-height:1.35}.route-button small{margin-top:6px;font-size:10px;color:#70847b;line-height:1.3}.rule{border:0;border-top:1px solid #d5dfd8;margin:24px 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:900}.field input,.field textarea{width:100%;border:1px solid #cbd9d1;border-radius:5px;background:white;color:#1c3434;padding:10px 11px;font-size:13px}.field input{height:42px}.field textarea{height:72px;resize:vertical;line-height:1.5}.field input::placeholder,.field textarea::placeholder{color:#99a9a0}.mission-control{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:24px;padding:15px 0;border-top:1px solid #d5dfd8;border-bottom:1px solid #d5dfd8}.mission-control small{display:block;margin-bottom:5px;color:#788b80;font-size:10px}.mission-control strong{font-size:12px;line-height:1.5}.shuffle{flex:0 0 auto;padding:8px 10px;border:1px solid #0b7573;border-radius:5px;background:none;color:#0b7573;font-size:11px;font-weight:900}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.action{min-height:45px;border:1px solid #0b7573;border-radius:5px;background:#0b7573;color:white;font-size:13px;font-weight:900}.action.secondary{background:transparent;color:#0b7573}.share{display:block;margin:8px auto 0}.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,15px);padding:10px 16px;border-radius:5px;background:#143f3e;color:white;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}footer{margin-top:36px;padding-top:18px;border-top:1px solid #d5dfd8;text-align:center;color:#87988d;font-size:10px}
+@media(max-width:800px){.shell{padding:18px 16px 32px}main{grid-template-columns:1fr;gap:28px;padding-top:28px}.preview,.editor{width:min(100%,500px);margin:auto}}@media(max-width:430px){.top small{display:none}.cover{padding:19px 21px}.cover-title{font-size:39px}.ticket{padding:16px 20px}.route-button{padding:7px}.route-button[aria-pressed=true]{padding:6px}.route-button strong{font-size:11px}.route-button small{font-size:9px}.back{padding:24px}.back h2{font-size:29px}.mission-box p{font-size:18px}}
+.card.flipped{aspect-ratio:auto}.card.flipped .back{position:relative;min-height:630px}.back h2{font-size:30px;margin:16px 0 8px}.mission-list{display:grid;gap:12px;list-style:none;padding:0;margin:24px 0}.mission-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:14px 12px;border:1px solid #6c9e95;border-radius:5px;background:#ffffff08}.mission-number{color:#ffca66;font-size:12px;font-weight:900;padding-top:4px}.mission-text{font-size:17px;font-weight:800;line-height:1.6;overflow-wrap:anywhere}.back-foot{padding-top:16px;font-size:11px;line-height:1.7}.mission-control{align-items:flex-start}.mission-summary{min-width:0}.mission-preview{padding-left:18px;margin:8px 0 0;display:grid;gap:7px;font-size:12px;font-weight:700;line-height:1.5}.mission-preview li::marker{color:#0b7573}.shuffle{margin-top:1px}.mission-control small{font-size:11px}
+@media(max-width:430px){.card.flipped .back{min-height:520px}.mission-list{gap:9px;margin:18px 0}.mission-list li{grid-template-columns:23px minmax(0,1fr);gap:8px;padding:11px 10px}.mission-text{font-size:14px}.mission-number{font-size:11px}.back h2{font-size:27px}.back .sub{font-size:12px}.mission-control{gap:10px}.shuffle{padding:8px}.mission-preview{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top"><div class="brand"><span class="mark" aria-hidden="true">✳</span>一日冒险卡</div><small>SHENZHEN · ONE DAY OUT</small></header>
+<main>
+<section class="preview" aria-labelledby="title">
+<p class="eyebrow">A LITTLE INVITATION</p><h1 id="title">把明天，变成一次冒险。</h1><p class="intro">挑一条路线，写上朋友的名字，送出一张只属于你们的深圳一日卡。</p>
+<div class="card" id="card" aria-label="冒险卡预览">
+<div class="front"><div class="cover"><div class="cover-top"><span>SHENZHEN / 01 DAY</span><span class="date-tag" id="card-date"></span></div><div class="cover-title">一起去<span>冒险吧！</span></div>
+<svg class="scene" viewBox="0 0 440 190" preserveAspectRatio="xMidYMax slice" role="img" aria-label="城市与海湾插画"><defs><linearGradient id="water" x2="0" y2="1"><stop stop-color="#2c8a90"/><stop offset="1" stop-color="#155e6b"/></linearGradient></defs><circle cx="354" cy="38" r="39" fill="#ffc65f"/><path d="M0 124Q80 99 150 127T300 120T440 123V190H0Z" fill="#307b78"/><g fill="#89c2af"><path d="M65 125V55h30v70m8 0V72h40v53m9 0V40h25v85m8 0V70h39v55m8 0V51h17V24h7v27h18v74m11 0V66h26v59m7 0V80h37v45"/></g><path d="M0 129Q60 115 117 131T233 127T343 132T440 123V190H0Z" fill="url(#water)"/><path d="M-5 151Q35 141 75 151T155 151T235 151T315 151T395 151T475 151M-5 174Q45 164 95 174T195 174T295 174T395 174" fill="none" stroke="#91cbc1" stroke-width="3" opacity=".5"/></svg></div>
+<div class="ticket"><div class="ticket-head"><span class="route-name" id="card-route"></span><span class="serial" id="card-serial"></span></div><ol class="stops" id="card-stops"></ol><div class="ticket-foot"><span id="card-friend"></span><span id="card-time"></span><span class="meet-location" id="card-place"></span></div></div></div>
+<div class="back"><small class="kicker">THREE LITTLE CHALLENGES</small><h2>今日隐藏任务</h2><div class="sub">三个小挑战，走到哪就玩到哪。</div><ol class="mission-list" id="back-mission"></ol><div class="back-foot" id="back-note"></div></div>
+</div><div class="flip-row"><span>正面是路线，背面藏着今日任务</span><button class="text-button" type="button" id="flip" aria-pressed="false">翻到背面 ↗</button></div>
+</section>
+<section class="editor" aria-label="定制冒险卡"><h2>01 / 选择一条冒险路线</h2><div class="routes" id="route-options" role="group" aria-label="冒险路线"></div>
+<hr class="rule"><h2>02 / 留下集合暗号</h2><div class="fields"><div class="field"><label for="friend">朋友怎么称呼</label><input id="friend" maxlength="14" placeholder="例如：阿橙"></div><div class="field"><label for="date">出发日期</label><input id="date" type="date"></div><div class="field"><label for="time">集合时间</label><input id="time" type="time" value="16:00"></div><div class="field"><label for="place">集合地点</label><input id="place" maxlength="30" placeholder="例如：公园入口或地铁站出口"></div><div class="field full"><label for="note">想对朋友说的话</label><textarea id="note" maxlength="80" placeholder="比如：明天把时间留给好天气和我们。"></textarea></div></div>
+<div class="mission-control"><div class="mission-summary"><small>今日隐藏任务 · 99 选 3</small><ol class="mission-preview" id="mission-preview" aria-live="polite"></ol></div><button class="shuffle" id="shuffle" type="button">换一组 ↻</button></div><div class="actions"><button class="action" id="download" type="button">下载双面 PNG</button><button class="action secondary" id="copy" type="button">复制邀请文案</button></div><button class="text-button share" id="share" type="button">用手机分享邀请 ↗</button></section>
+</main><footer>路线是灵感，出行前请确认开放时间、天气和交通。深圳一日冒险卡 · 2026</footer></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const routes = {
+  bay: { number: '01', name: '深圳湾公园', district: '南山', meet: '深圳湾公园站D2口', tip: '带上饮水和野餐垫，出发前确认日落时间。', stops: [['16:00', '深圳湾公园站D2口'], ['16:15', '白鹭坡'], ['16:45', '流花山'], ['17:20', '滨海绿道'], ['18:00', '日出剧场']] },
+  mangrove: { number: '02', name: '红树林', district: '福田', meet: '红树林海滨生态公园入口', tip: '提前查询潮汐，观鸟时与鸟群保持距离。', stops: [['16:00', '红树林海滨生态公园'], ['16:20', '滨海木栈道'], ['16:45', '观鸟亭'], ['17:30', '中湾阅海广场'], ['18:00', '白鹭坡']] },
+  harbour: { number: '03', name: '欢乐港湾', district: '宝安', meet: '滨海文化公园入口', tip: '摩天轮票务与水秀场次以当天公布为准。', stops: [['17:00', '滨海文化公园'], ['17:40', '滨海栈道'], ['18:10', '湾区之光摩天轮'], ['19:30', '水秀区域'], ['20:10', '海边晚餐']] },
+  shekou: { number: '04', name: '蛇口', district: '南山', meet: '海上世界文化艺术中心入口', tip: '展览、演出和餐厅营业时间建议提前确认。', stops: [['14:00', '海上世界文化艺术中心'], ['16:00', '临海步道'], ['17:00', '太子湾'], ['18:30', '明华轮'], ['20:00', '南海意库']] },
+  civic: { number: '05', name: '市民中心', district: '福田', meet: '当代艺术与城市规划馆入口', tip: '部分展馆周一闭馆，酒吧营业与低消请先确认。', stops: [['14:00', '当代艺术与城市规划馆'], ['16:30', '中心书城'], ['18:00', '附近晚餐'], ['20:00', '高空酒吧']] },
+  oct: { number: '06', name: '华侨城', district: '南山', meet: '华侨城创意文化园南区入口', tip: '周末人流较多，独立店铺营业时间可能变化。', stops: [['14:30', '创意园南区'], ['15:30', '旧天堂书店'], ['16:30', '咖啡馆'], ['17:30', '创意园北区'], ['19:00', '香山中街与晚餐']] },
+  dafen: { number: '07', name: '大芬油画村', district: '龙岗', meet: '大芬美术馆入口', tip: '画室可提前预约，绘画体验建议预留约3小时。', stops: [['14:00', '大芬美术馆'], ['15:00', '油画村'], ['15:40', '选择画室'], ['16:00', '一起绘画'], ['19:00', '咖啡馆与晚餐']] },
+  westbay: { number: '08', name: '西湾红树林', district: '宝安', meet: '西湾红树林公园入口', tip: '提前确认公园露营规定，并留意日落天气。', stops: [['16:00', '海边草坪'], ['16:40', '海岸栈道'], ['17:10', '观景台'], ['18:00', '日落机位'], ['19:30', '宝安中心晚餐']] },
+  nantou: { number: '09', name: '南头古城', district: '南山', meet: '南头古城南门', tip: '演出请提前确认购票，晚间留意返程交通。', stops: [['16:00', '南头古城'], ['17:00', '十日谈咖啡'], ['19:00', '脱口秀或即兴喜剧'], ['21:00', '古城夜逛'], ['22:00', '小酒吧']] }
+};
+const missions = [
+  "各自寻找一种今天最喜欢的颜色，再比较答案。",
+  "找出身边三种不同形状的叶子，只观察不采摘。",
+  "发现一个平时容易忽略的小细节，指给朋友看。",
+  "抬头找一朵有趣的云，给它起一个专属名字。",
+  "找一处新旧建筑同框的位置，聊聊各自的偏好。",
+  "留意路上的文字，选一句作为今天的出发宣言。",
+  "寻找一个圆形、一个三角形和一个正方形。",
+  "各自发现一件蓝色物品，看谁的发现更特别。",
+  "找一个有意思的店名，猜猜名字背后的故事。",
+  "观察一棵树的树影，想象它像哪一种小动物。",
+  "找一块有趣的路牌，用它编一个冒险故事开头。",
+  "发现三种不同材质，用三个词描述触感想象。",
+  "找一个能代表深圳的小细节，解释你的选择。",
+  "观察一段光影变化，用一句话描述眼前画面。",
+  "各选一个最舒服的角落，互相说说选择理由。",
+  "寻找一组意外和谐的颜色，记进今日灵感清单。",
+  "观察远处的天际线，找出最有辨识度的轮廓。",
+  "找到一处自然与城市同框的景色，停留一分钟。",
+  "留意脚下不同的地面纹理，选出最特别的一种。",
+  "给眼前的景色打上三个标签，再交换彼此答案。",
+  "各拍一张同一处风景，看看两人的构图差别。",
+  "拍一张只有影子的合照，给照片起个有趣标题。",
+  "用一张照片收集今天的阳光，阴天就收集云层。",
+  "拍一张不露脸的同行照，让画面讲述今天故事。",
+  "找到天然取景框，拍一张窗里或树间的风景。",
+  "用三张照片记录一个小主题，比如蓝色或圆形。",
+  "拍一张有前景和远景的照片，试试画面的层次。",
+  "拍下今天第一眼觉得有趣的东西，并说明原因。",
+  "各用手机拍一个细节，让对方猜它在哪里。",
+  "给同一处景色拍横版和竖版，选出更喜欢的一张。",
+  "拍一张极简照片，让画面只留下一个主要元素。",
+  "把今天的一段路拍成短视频，记录走路的节奏。",
+  "找一处倒影拍照，试着让真实与倒影交换位置。",
+  "拍一张今天的天空，给它配一句天气播报。",
+  "用照片收集三个不同的数字，拼成今日幸运码。",
+  "各选一张今日照片，讲讲拍下它时的想法。",
+  "拍一个像字母的城市细节，让朋友猜猜是什么。",
+  "用同一构图拍两个不同角落，制作一组小对照。",
+  "拍一张能当手机壁纸的风景，互相推荐成片。",
+  "给今天拍的照片取一个只有你们懂的系列名。",
+  "分享最近让自己开心的一件小事，认真听完。",
+  "各说一个想尝试的小爱好，聊聊第一步怎么做。",
+  "回忆小时候最喜欢的游戏，现场讲清楚玩法。",
+  "互相推荐一首适合此刻的歌，说说推荐理由。",
+  "各选一个词形容今天的心情，再解释一下。",
+  "聊聊最近一次意外收获，哪怕只是一顿好饭。",
+  "说出一个想再去一次的地方，分享当时的记忆。",
+  "如果明天多出一小时，聊聊最想拿它做什么。",
+  "各讲一个曾经闹过的小乌龙，一起轻松笑一笑。",
+  "交换一条实用的生活小窍门，看看有没有新发现。",
+  "分享最近看过的好书或好片，尽量不剧透。",
+  "各说一种理想周末的打开方式，找出共同点。",
+  "聊聊最喜欢的一种天气，以及适合做的事情。",
+  "说说小时候想从事的职业，回顾当时的理由。",
+  "各描述一道记忆里的家常菜，猜猜是什么味道。",
+  "假如能开一家小店，聊聊店名和最想卖的东西。",
+  "分享一次走错路却发现好风景的经历。",
+  "各说一个最近学会的小知识，给对方补充灵感。",
+  "为下次出游各提一个目的地，先记进愿望清单。",
+  "互相说一个今天欣赏到的优点，具体到一件事。",
+  "玩一轮颜色接龙，每人说一种眼前能找到的颜色。",
+  "轮流说出与海有关的词，看能接出多少个。",
+  "各猜下一分钟会看到什么，再看看谁的猜测成真。",
+  "挑一个眼前的物品，只用三个提示让对方猜。",
+  "玩一轮城市名接龙，卡住时可以一起查答案。",
+  "各想一种动物，只用动作让对方猜出答案。",
+  "轮流给今天编一句故事，每人接一句凑成短篇。",
+  "用三个毫不相关的词，合作编一个奇妙故事。",
+  "各说两件真事和一件虚构小事，让朋友猜一猜。",
+  "找一个安静角落，挑战同时说出同一种水果。",
+  "停稳脚步记住眼前细节，再闭眼轮流描述。",
+  "选一个主题轮流举例，看看能否合作凑满十个。",
+  "用手势比出今天的幸运数字，再一起揭晓。",
+  "各写一个词，同时亮出来，试着把它们连成句子。",
+  "玩一轮反义词接力，从大与小开始自由发挥。",
+  "轮流模仿一种交通工具的声音，轻声让对方猜。",
+  "给眼前的一栋建筑起外号，看谁的名字更贴切。",
+  "各想一种超能力，讨论它能怎样帮助今天出游。",
+  "从一到十各选一个数字，看看默契能有几分。",
+  "猜猜今天拍了多少张照片，打开相册核对答案。",
+  "给今天设计一个冒险队名，顺便想一句口号。",
+  "用手机备忘录写一首四行小诗，轮流完成一句。",
+  "画一个十秒钟小涂鸦，让朋友为它添加结尾。",
+  "设计一枚今日专属表情，用文字或小画记录下来。",
+  "给眼前景色配一句电影旁白，轮流当配音员。",
+  "各用三个词写一条今日新闻，合成你们的小报。",
+  "为今天的路线起一个新名字，突出最喜欢的瞬间。",
+  "给未来的自己留一句话，约定下次出游再读。",
+  "把今天的一件小事编成广告语，试着读得很认真。",
+  "合作列出五件免费也能让人开心的小事。",
+  "找个合适的位置坐一会儿，一起安静看一分钟风景。",
+  "停下脚步听一会儿，分别说出听见的三种声音。",
+  "各用一句话描述此刻的风，看看感受是否相同。",
+  "喝口水休息一下，顺便交换目前最喜欢的一站。",
+  "收起手机三分钟，把注意力留给眼前的景色。",
+  "慢慢走过一小段路，留意平时忽略的气味和声音。",
+  "为今天选一个最值得保存的瞬间，记录在备忘录。",
+  "各提名一个今日最佳发现，再给它颁一个小奖。",
+  "用一句话给今天收尾，并留下下次冒险的小期待。"
+];
+const $=id=>document.getElementById(id),fields={friend:$('friend'),date:$('date'),time:$('time'),place:$('place'),note:$('note')},state={route:'bay',missionIds:[]};
+function drawMissions(){
+  const pool=missions.map((_,index)=>index).filter(index=>!state.missionIds.includes(index));
+  state.missionIds=Array.from({length:3},()=>pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+}
+function selectedMissions(){return state.missionIds.map(index=>missions[index])}
+function renderMissions(){
+  $('back-mission').replaceChildren(...selectedMissions().map((text,index)=>{
+    const li=document.createElement('li');
+    const number=document.createElement('span');number.className='mission-number';number.textContent=String(index+1).padStart(2,'0');
+    const content=document.createElement('span');content.className='mission-text';content.textContent=text;
+    li.append(number,content);return li;
+  }));
+  $('mission-preview').replaceChildren(...selectedMissions().map(text=>{const li=document.createElement('li');li.textContent=text;return li}));
+}
+function buildRouteButtons(){
+  const buttons=Object.entries(routes).map(([key,route])=>{
+    const button=document.createElement('button');button.className='route-button';button.type='button';button.dataset.route=key;
+    const title=document.createElement('strong');title.textContent=`${route.number} ${route.name}`;
+    const detail=document.createElement('small');detail.textContent=`${route.district} · ${route.stops[0][0]}`;
+    button.append(title,detail);button.addEventListener('click',()=>{state.route=key;fields.time.value=route.stops[0][0];fields.place.value='';render()});return button;
+  });
+  $('route-options').replaceChildren(...buttons);
+}
+const pad=n=>String(n).padStart(2,'0'),next=new Date();next.setDate(next.getDate()+1);const defaultDate=`${next.getFullYear()}-${pad(next.getMonth()+1)}-${pad(next.getDate())}`,days=['周日','周一','周二','周三','周四','周五','周六'];
+function shortDate(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return '日期待定';const [y,m,d]=value.split('-').map(Number);return `${m}.${pad(d)} ${days[new Date(y,m-1,d).getDay()]}`}
+function fullDate(value){if(!value)return '日期待定';const [y,m,d]=value.split('-').map(Number);return `${y}年${m}月${d}日（${days[new Date(y,m-1,d).getDay()]}）`}
+function meeting(){return fields.place.value.trim()||routes[state.route].meet}function message(){return fields.note.value.trim()||'把时间留给好天气和我们。'}
+function render(){
+  const route=routes[state.route];
+  $('card-date').textContent=shortDate(fields.date.value);
+  $('card-route').textContent=route.name;
+  $('card-serial').textContent=`ROUTE ${route.number} / 09`;
+  $('card-stops').replaceChildren(...route.stops.map(([time,name])=>{
+    const li=document.createElement('li');li.className='stop';
+    const t=document.createElement('time');t.textContent=time;
+    const n=document.createElement('span');n.textContent=name;
+    li.append(t,n);return li;
+  }));
+  $('card-friend').textContent=`TO：${fields.friend.value.trim()||'我的冒险搭子'}`;
+  $('card-time').textContent=`${fields.time.value||route.stops[0][0]} 出发`;
+  $('card-place').textContent=`集合：${meeting()}`;
+  renderMissions();
+  $('back-note').textContent=`小提示：${route.tip}\n集合：${fullDate(fields.date.value)} ${fields.time.value||route.stops[0][0]} · ${meeting()}\n${message()}`;
+  document.querySelectorAll('.route-button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.route===state.route)));
+  try{localStorage.setItem('sz-adventure-card',JSON.stringify({route:state.route,missionIds:state.missionIds,...Object.fromEntries(Object.entries(fields).map(([k,v])=>[k,v.value]))}))}catch(_){}
+}
+function invitation(){
+  const route=routes[state.route];
+  return `${fields.friend.value.trim()||'冒险搭子'}，要不要一起去深圳冒险？\n\n📍 ${route.district} · ${route.name} · ${fullDate(fields.date.value)}\n🕙 ${fields.time.value||route.stops[0][0]} 在${meeting()}集合\n\n${route.stops.map(([time,name])=>`${time}  ${name}`).join('\n')}\n\n🎯 今日隐藏任务\n${selectedMissions().map((text,index)=>`${index+1}. ${text}`).join('\n')}\n\n💡 ${route.tip}\n\n${message()}\n\n回我一个“出发”，这张冒险卡就生效啦！`;
+}
+let toastTimer;function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400)}
+async function copy(){const value=invitation()+(isHosted?'\n\n打开冒险卡：'+cardLink():'');await copyValue(value,'邀请文案已复制')}
+async function copyValue(value,success){try{await navigator.clipboard.writeText(value);toast(success)}catch(_){const el=document.createElement('textarea');el.value=value;document.body.append(el);el.select();const ok=document.execCommand('copy');el.remove();toast(ok?success:'复制失败，请使用浏览器分享')}}
+function drawWrappedText(context,text,left,top,maxWidth,lineHeight){
+  let line='',baseline=top;
+  for(const character of text){
+    if(character==='\n'||context.measureText(line+character).width>maxWidth){context.fillText(line,left,baseline);baseline+=lineHeight;line=character==='\n'?'':character}
+    else line+=character;
+  }
+  if(line)context.fillText(line,left,baseline);
+  return baseline;
+}
+function download(){
+  const canvas=document.createElement('canvas');canvas.width=880;canvas.height=2460;
+  const x=canvas.getContext('2d'),route=routes[state.route];
+  x.fillStyle='#dfe8e2';x.fillRect(0,0,880,2460);
+  x.fillStyle='#fffef9';x.fillRect(0,0,880,1300);
+  x.fillStyle='#114348';x.fillRect(0,0,880,610);
+  x.fillStyle='#fff';x.font='bold 23px Microsoft YaHei, sans-serif';x.fillText('SHENZHEN / 01 DAY',55,70);
+  x.textAlign='right';x.fillText(shortDate(fields.date.value),820,70);x.textAlign='left';
+  x.font='900 96px Microsoft YaHei, sans-serif';x.fillText('一起去',55,225);
+  x.fillStyle='#ffca66';x.fillText('冒险吧！',55,335);
+  x.beginPath();x.arc(715,365,75,0,Math.PI*2);x.fill();
+  x.fillStyle='#83bfb0';
+  [[70,420,55,130],[140,440,72,110],[230,380,48,170],[300,425,80,125],[420,415,42,140],[470,365,55,190],[550,430,50,120],[625,445,70,105]].forEach(([a,b,w,h])=>x.fillRect(a,b,w,h));
+  x.fillStyle='#2c8a90';x.beginPath();x.moveTo(0,510);x.quadraticCurveTo(170,490,340,515);x.quadraticCurveTo(550,545,880,505);x.lineTo(880,610);x.lineTo(0,610);x.fill();
+  x.fillStyle='#1c3434';x.font='900 43px Microsoft YaHei, sans-serif';x.fillText(route.name,55,695,540);
+  x.fillStyle='#83958d';x.font='bold 22px Microsoft YaHei, sans-serif';x.textAlign='right';x.fillText(`ROUTE ${route.number} / 09`,825,695);x.textAlign='left';
+  route.stops.forEach(([time,name],i)=>{
+    const y=772+i*66;
+    x.fillStyle='#d16649';x.font='bold 27px Microsoft YaHei, sans-serif';x.fillText(time,60,y);
+    x.fillStyle='#1c3434';x.font='bold 30px Microsoft YaHei, sans-serif';x.fillText(name,180,y,640);
+  });
+  x.setLineDash([12,9]);x.strokeStyle='#b8cbc2';x.beginPath();x.moveTo(55,1115);x.lineTo(825,1115);x.stroke();x.setLineDash([]);
+  x.fillStyle='#5a736a';x.font='bold 25px Microsoft YaHei, sans-serif';x.fillText(`TO：${fields.friend.value.trim()||'我的冒险搭子'}`,55,1160,520);
+  x.textAlign='right';x.fillText(`${fields.time.value||route.stops[0][0]} 出发`,825,1160);x.textAlign='left';
+  x.fillStyle='#5a736a';x.font='bold 20px Microsoft YaHei, sans-serif';x.fillText(`集合：${meeting()}`,55,1210,770);
+  x.font='18px Microsoft YaHei, sans-serif';x.fillText(`小提示：${route.tip}`,55,1250,770);
+  const backTop=1320;
+  x.fillStyle='#114348';x.fillRect(0,backTop,880,1140);
+  x.fillStyle='#ffca66';x.font='bold 23px Microsoft YaHei, sans-serif';x.fillText('MISSION CARD / BACK',55,backTop+65);
+  x.textAlign='right';x.fillText(shortDate(fields.date.value),825,backTop+65);x.textAlign='left';
+  x.fillStyle='#fffef9';x.font='900 58px Microsoft YaHei, sans-serif';x.fillText('今日隐藏任务',55,backTop+155);
+  x.fillStyle='#bdd9cf';x.font='25px Microsoft YaHei, sans-serif';x.fillText('三个小挑战，走到哪就玩到哪。',55,backTop+210);
+  selectedMissions().forEach((text,index)=>{
+    const top=backTop+270+index*165;
+    x.fillStyle='#1c5054';x.fillRect(55,top,770,142);
+    x.strokeStyle='#6c9e95';x.lineWidth=1;x.strokeRect(55,top,770,142);
+    x.fillStyle='#ffca66';x.font='bold 25px Microsoft YaHei, sans-serif';x.fillText(String(index+1).padStart(2,'0'),80,top+82);
+    x.fillStyle='#fffef9';x.font='bold 28px Microsoft YaHei, sans-serif';drawWrappedText(x,text,145,top+82,650,40);
+  });
+  x.setLineDash([12,9]);x.strokeStyle='#7cac9e';x.beginPath();x.moveTo(55,backTop+815);x.lineTo(825,backTop+815);x.stroke();x.setLineDash([]);
+  x.fillStyle='#ffca66';x.font='bold 24px Microsoft YaHei, sans-serif';x.fillText(`TO：${fields.friend.value.trim()||'我的冒险搭子'}`,55,backTop+865,770);
+  x.fillStyle='#e5efea';x.font='22px Microsoft YaHei, sans-serif';drawWrappedText(x,message(),55,backTop+910,770,31);
+  x.fillStyle='#bdd9cf';x.font='20px Microsoft YaHei, sans-serif';drawWrappedText(x,`${fields.time.value||route.stops[0][0]} 集合 · ${meeting()}`,55,backTop+1035,770,29);
+  const a=document.createElement('a');a.download=`深圳一日冒险卡-双面-${route.number}-${fields.date.value||'明天'}.png`;a.href=canvas.toDataURL('image/png');a.click();toast('正反两面已下载为一张图片');
+}
+Object.values(fields).forEach(v=>v.addEventListener('input',render));$('shuffle').addEventListener('click',()=>{drawMissions();render()});$('flip').addEventListener('click',()=>{const yes=$('card').classList.toggle('flipped');$('flip').textContent=yes?'翻回正面 ↗':'翻到背面 ↗';$('flip').setAttribute('aria-pressed',String(yes))});$('copy').addEventListener('click',copy);$('download').addEventListener('click',download);$('share').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'深圳一日冒险卡',text:invitation(),...(isHosted?{url:cardLink()}:{})})}catch(e){if(e.name!=='AbortError')await copy()}}else await copy()});
+buildRouteButtons();
+try{
+  const saved=JSON.parse(localStorage.getItem('sz-adventure-card')||'{}');const valid=!!routes[saved.route];
+  if(valid)state.route=saved.route;
+  if(Array.isArray(saved.missionIds)&&saved.missionIds.length===3&&new Set(saved.missionIds).size===3&&saved.missionIds.every(index=>Number.isInteger(index)&&index>=0&&index<missions.length))state.missionIds=saved.missionIds;
+  fields.friend.value=saved.friend||'';fields.date.value=saved.date||defaultDate;fields.time.value=valid?(saved.time||routes[state.route].stops[0][0]):routes[state.route].stops[0][0];fields.place.value=valid?(saved.place||''):'';fields.note.value=saved.note||'';
+}catch(_){fields.date.value=defaultDate;fields.time.value=routes[state.route].stops[0][0]}
+if(state.missionIds.length!==3)drawMissions();
+render();
+const isHosted=/^https?:$/.test(location.protocol);
+function cardLink(){
+  const data={v:1,route:state.route,missionIds:[...state.missionIds],...Object.fromEntries(Object.entries(fields).map(([key,input])=>[key,input.value]))};
+  const bytes=new TextEncoder().encode(JSON.stringify(data));
+  const encoded=btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const url=new URL(location.href);url.hash='card='+encoded;return url.href;
+}
+function loadLinkedCard(){
+  const encoded=new URLSearchParams(location.hash.slice(1)).get('card');if(!encoded)return;
+  try{
+    if(encoded.length>4000)throw new Error('Card too long');
+    const bytes=Uint8Array.from(atob(encoded.replace(/-/g,'+').replace(/_/g,'/')),character=>character.charCodeAt(0));
+    const data=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+    if(data.v!==1||!Object.hasOwn(routes,data.route)||!Array.isArray(data.missionIds)||data.missionIds.length!==3||new Set(data.missionIds).size!==3||!data.missionIds.every(index=>Number.isInteger(index)&&index>=0&&index<missions.length))throw new Error('Invalid card');
+    state.route=data.route;state.missionIds=data.missionIds;
+    const text=(key,limit)=>typeof data[key]==='string'?data[key].slice(0,limit):'';
+    fields.friend.value=text('friend',14);fields.place.value=text('place',30);fields.note.value=text('note',80);
+    fields.date.value=/^\d{4}-\d{2}-\d{2}$/.test(data.date)?data.date:defaultDate;if(!fields.date.value)fields.date.value=defaultDate;
+    fields.time.value=/^([01]\d|2[0-3]):[0-5]\d$/.test(data.time)?data.time:routes[state.route].stops[0][0];
+    render();
+  }catch(_){toast('这条卡片链接不完整，已打开普通版本')}
+}
+if(isHosted){
+  const linkButton=document.createElement('button');linkButton.type='button';linkButton.id='copy-link';linkButton.className='action secondary';linkButton.style.gridColumn='1 / -1';linkButton.textContent='复制这张卡的链接';
+  linkButton.addEventListener('click',()=>copyValue(cardLink(),'卡片链接已复制'));document.querySelector('.actions').append(linkButton);
+}
+loadLinkedCard();addEventListener('hashchange',loadLinkedCard);
+</script>
+</body>
+</html>
